@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Component } from 'react';
-import * as Progress from 'react-native-progress';
+import ProgressBar from 'react-native-progress/Bar';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -38,7 +38,8 @@ class GameScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      percent: 0,
+      interval: 0,
+      percent: 1,
       question: "",
       score: 0,
       button1: {status: true, isCorrect: false, val: 0},
@@ -53,19 +54,20 @@ class GameScreen extends Component {
   componentDidMount() {
     const startTime = new Date();
     const interval = setInterval(() => {
-      const percent = 100 - 100 * (new Date() - startTime) / 5000;
+      const percent = 1 - (new Date() - startTime) / 2000;
+      this.setState({ percent });
+
       if (percent < 0) {
         clearInterval(interval);
         this.props.navigation.replace('GameResults', {score: this.state.score, level: "pepe"});
-      } else {
-        this.setState({ percent });
       }
     }, 1000);
+    this.setState({interval});
     this.newQuestion();
   }
 
   componentWillUnmount() {
-    console.log("UNMOUNT!");
+    clearInterval(this.state.interval);
   }
 
   handleClickButton(button) {
@@ -74,7 +76,8 @@ class GameScreen extends Component {
       this.newQuestion();
     } else {
       button.status = false;
-      this.setState({button, score: this.state.score - 1});
+      const newScore = this.state.score > 0 ? this.state.score - 1 : 0;
+      this.setState({button, score: newScore});
     }
   }
 
@@ -83,13 +86,8 @@ class GameScreen extends Component {
     const b = getRandomInt(1, 10);
     const result = a + b;
 
-    const choices = [result, result - 1, result + 1, result + 2];
-    const buttonsData = shuffleArray([
-      {status: true, isCorrect: true, val: choices[0]},
-      {status: true, isCorrect: false, val: choices[1]},
-      {status: true, isCorrect: false, val: choices[2]},
-      {status: true, isCorrect: false, val: choices[3]},
-    ]);
+    const choices = [result, result - 1, result + 1, result + 10];
+    const buttonsData = shuffleArray(choices.map(c => ({status: true, isCorrect: result === c, val: c})));
 
     this.setState({
       question: `${a}+${b}`,
@@ -105,11 +103,11 @@ class GameScreen extends Component {
     {/* <Text>Level: {route.params.level}</Text> */}
     <Text>Score: {this.state.score}</Text>
     <Text>{this.state.question}</Text>
-    <Progress.Bar progress={this.state.percent} width={200} />
-    <Button disabled={!this.state.button1.status} onPress={() => this.handleClickButton(this.state.button1)} title={this.state.button1.val} />
-    <Button disabled={!this.state.button2.status} onPress={() => this.handleClickButton(this.state.button2)} title={this.state.button2.val} />
-    <Button disabled={!this.state.button3.status} onPress={() => this.handleClickButton(this.state.button3)} title={this.state.button3.val} />
-    <Button disabled={!this.state.button4.status} onPress={() => this.handleClickButton(this.state.button4)} title={this.state.button4.val} />
+    <ProgressBar progress={this.state.percent} width={200} borderRadius={0} height={20} animationType={"timing"}/>
+    <Button disabled={!this.state.button1.status} onPress={() => this.handleClickButton(this.state.button1)} title={this.state.button1.val.toString()} />
+    <Button disabled={!this.state.button2.status} onPress={() => this.handleClickButton(this.state.button2)} title={this.state.button2.val.toString()} />
+    <Button disabled={!this.state.button3.status} onPress={() => this.handleClickButton(this.state.button3)} title={this.state.button3.val.toString()} />
+    <Button disabled={!this.state.button4.status} onPress={() => this.handleClickButton(this.state.button4)} title={this.state.button4.val.toString()} />
   </View>
   }
 }
