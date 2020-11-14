@@ -6,9 +6,9 @@ import mathLevels from '../lib/math-levels';
 const ShowOps = ({ops}) => {
   return ops.map(op => {
     if (op === '+') {
-      return <AntDesign key='+' name="plussquare" size={32} color="#e03528"/>;
+      return <AntDesign key='+' name="plussquare" size={32} color="#18427c"/>;
     } else if (op === '-') {
-      return <AntDesign key='-' name="minussquare" size={32} color="#05e38e"/>;
+      return <AntDesign key='-' name="minussquare" size={32} color="#d9f0ff"/>;
     }
   });
 }
@@ -17,7 +17,7 @@ const Item = ({ item, onPress, style }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
     <Text style={[styles.title]}>
       {item.title}&nbsp;
-      <ShowOps ops={['+', '-']}/>
+      <ShowOps ops={item.ops}/>
     </Text>
   </TouchableOpacity>
 );
