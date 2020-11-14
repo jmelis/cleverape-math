@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity }
 
 const DATA = [
   {
-    levelId: "addition-below-ten",
+    levelId: "add-below-ten",
     title: "Simple addition smaller than 10",
   },
 ];
@@ -16,11 +16,11 @@ const Item = ({ item, onPress, style }) => (
 
 const HomeScreen = ({ navigation }) => {
   const renderItem = ({ item }) => {
-
     return (
       <Item
         item={item}
         onPress={() => navigation.navigate('GameScreen', {level: item.levelId})}
+        // onPress={() => navigation.navigate('GameResults', {level: item.levelId, score: 20})}
       />
     );
   };

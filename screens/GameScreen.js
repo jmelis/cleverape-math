@@ -1,26 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import { Component } from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 
-import mathQuestion from '../lib/math-question';
+import mathQuestion, { shuffleArray } from '../lib/math-question';
 
-const GAME_LENGTH = 120; // in seconds
-
-function shuffleArray(_array) {
-  const array = _array.slice();
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
-// <Button buttonStyle={{ flex: 1 }} disabled={!this.state.button1.status}
-// onPress={() => this.handleClickButton(this.state.button1)}
-// title={this.state.button1.val.toString()} />
+const GAME_LENGTH = 90; // in seconds
 
 function AnsButton({ title, disabled, handler}) {
   return <TouchableOpacity style={styles.touchable} disabled={disabled} onPress={() => handler()}>
@@ -92,11 +77,13 @@ class GameScreen extends Component {
 
   render() {
     return <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Text style={{ flex: 1 }}>Level: {this.props.route.params.level}</Text>
-        <Text style={{ flex: 1, textAlign: 'right' }}>Score: {this.state.score}</Text>
+      <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems:'center', }}>
+          <Text style={{ fontSize: 30 }}>&nbsp;{this.state.score}&nbsp;</Text>
+          <Image style={{ width: 40, height: 40 }} source={require('../img/star.png')} />
+        </View>
       </View>
-      <Text style={{ flex: 1, fontSize: 200, textAlign: 'center', fontSize: 0.30 * Dimensions.get('window').width }}>{this.state.question}</Text>
+      <Text style={styles.question}>{this.state.question}</Text>
       <ProgressBar style={styles.progressbar} width={null} progress={this.state.percent} borderRadius={0} height={30} />
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <AnsButton title={this.state.button1.val.toString()} disabled={!this.state.button1.status} handler={() => this.handleClickButton(this.state.button1)} />
@@ -111,6 +98,11 @@ class GameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  question: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 120,
+  },
   progressbar: {
     flex: 1,
     justifyContent: 'center',
@@ -140,6 +132,5 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
 });
-
 
 export default GameScreen;
