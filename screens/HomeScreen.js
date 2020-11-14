@@ -8,7 +8,7 @@ const ShowOps = ({ops}) => {
     if (op === '+') {
       return <AntDesign key='+' name="plussquare" size={32} color="#18427c"/>;
     } else if (op === '-') {
-      return <AntDesign key='-' name="minussquare" size={32} color="#d9f0ff"/>;
+      return <AntDesign key='-' name="minussquare" size={32} color="#a5daff"/>;
     }
   });
 }
