@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'rea
 import { Component } from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 
-import mathQuestion, { shuffleArray } from '../lib/math-question';
+import mathLevels from '../lib/math-levels';
+import { shuffleArray } from '../lib/math-question';
 
-const GAME_LENGTH = 90; // in seconds
+const GAME_LENGTH = 120; // in seconds
 
 function AnsButton({ title, disabled, handler}) {
   return <TouchableOpacity style={styles.touchable} disabled={disabled} onPress={() => handler()}>
@@ -16,7 +17,6 @@ function AnsButton({ title, disabled, handler}) {
 class GameScreen extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       interval: 0,
       percent: 1,
@@ -42,6 +42,7 @@ class GameScreen extends Component {
         this.props.navigation.replace('GameResults', { score: this.state.score, level: this.props.route.params.level });
       }
     }, 1000);
+
     this.setState({ interval });
     this.newQuestion();
   }
@@ -62,9 +63,10 @@ class GameScreen extends Component {
   }
 
   newQuestion() {
-    const mq = mathQuestion();
+    const level = this.props.route.params.level;
+    const mq = mathLevels.filter(e => e.id === level)[0].func();
+    console.log(mq);
     const choices = [mq.result].concat(mq.otherChoices);
-
     const buttonsData = shuffleArray(choices.map(c => ({ status: true, isCorrect: mq.result === c, val: c })));
     this.setState({
       question: mq.question,
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
   progressbar: {
     flex: 1,
     justifyContent: 'center',
-    color: '#4978c4',
+    color: '#18427c',
     borderWidth: 0,
     padding: 10,
   },
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#eaeaea",
   },
   button: {
-    backgroundColor: '#4978c4',
+    backgroundColor: '#18427c',
     textAlign: "center",
     alignSelf: "stretch",
     padding: 30,

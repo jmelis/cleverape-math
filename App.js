@@ -12,9 +12,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="GameScreen" component={GameScreen} />
-        <Stack.Screen name="GameResults" component={GameResults} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Select Level' }}/>
+        <Stack.Screen name="GameScreen" component={GameScreen} options={{ title: 'Play!' }}/>
+        <Stack.Screen name="GameResults" component={GameResults} options={{ title: 'Results' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
