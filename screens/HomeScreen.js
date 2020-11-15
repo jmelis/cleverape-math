@@ -17,13 +17,15 @@ const ShowOps = ({ ops }) => {
 
 const Item = ({ item, onPress, style, maxScore }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <View style={{ flex: 1, flexDirection: 'row' }}></View>
-    <Text style={[styles.title]}>
-      {item.title}&nbsp;
-      <ShowOps ops={item.ops} />
-      --
-      <AntDesign name="star" size={32} color={maxScore === 0 ? "#a0a0a0" : "#f5e920"} />{maxScore}
-    </Text>
+    <View style={{flex: 1, flexDirection: 'row'}}>
+        <Text style={{flex: 10, fontSize: 32}}>
+          <ShowOps ops={item.ops} />&nbsp;{item.title}
+        </Text>
+        <Text style={{flex: 4, fontSize: 32, textAlign: 'right'}}>
+          {maxScore}
+          <AntDesign name="star" size={32} color={maxScore === 0 ? "#a0a0a0" : "#f5e920"} />
+        </Text>
+    </View>
   </TouchableOpacity>
 );
 
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: 'white',
-
     padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
