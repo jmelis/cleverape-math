@@ -65,7 +65,6 @@ class GameScreen extends Component {
   newQuestion() {
     const level = this.props.route.params.level;
     const mq = mathLevels.filter(e => e.id === level)[0].func();
-    console.log(mq);
     const choices = [mq.result].concat(mq.otherChoices);
     const buttonsData = shuffleArray(choices.map(c => ({ status: true, isCorrect: mq.result === c, val: c })));
     this.setState({
