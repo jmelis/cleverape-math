@@ -41,6 +41,10 @@ const HomeScreen = ({ navigation }) => {
       }
     };
 
+    navigation.addListener('focus', () => {
+      getScores();
+    });
+
     getScores();
   }, []);
 
