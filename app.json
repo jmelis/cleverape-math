@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "cleverapes-math",
+    "name": "CleverApes Math",
     "slug": "cleverapes-math",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/cleverapes-math.png",
+    "primaryColor": "#18427c",
     "splash": {
       "image": "./assets/cleverapes-math.png",
       "backgroundColor": "#ffffff"
@@ -27,6 +28,8 @@
     },
     "web": {
       "favicon": "./assets/cleverapes-math.png"
-    }
+    },
+    "description": "Very simple app for children to practice basic arithmetic.\n",
+    "githubUrl": "https://github.com/jmelis/cleverapes-math"
   }
 }
