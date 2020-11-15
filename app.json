@@ -2,7 +2,7 @@
   "expo": {
     "name": "CleverApes Math",
     "slug": "cleverapes-math",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/cleverapes-math.png",
     "primaryColor": "#18427c",
@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/cleverapes-math.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.cleverapes.math"
+      "package": "com.cleverapes.math",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/cleverapes-math.png"
