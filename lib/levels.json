@@ -1,0 +1,50 @@
+{
+  "defaults": {
+    "op": "+",
+    "aMin": "1",
+    "aMax": "10",
+    "bMin": "1",
+    "bMax": "10",
+    "positiveResult": false
+  },
+  "levels": [
+    {
+      "id": "add-one-to-five",
+      "title": "1 to 5",
+      "questions": [
+        { "op": "+", "aMax": 5, "bMax": 5 }
+      ]
+    },
+    {
+      "id": "subtract-positive-one-to-five",
+      "title": "1 to 5",
+      "questions": [
+        { "op": "-", "aMax": 5, "bMax": 5, "positiveResult": true }
+      ]
+    },
+    {
+      "id": "add-subtract-positive-one-to-ten",
+      "title": "1 to 10",
+      "questions": [
+        { "op": "+" },
+        { "op": "-", "positiveResult": true }
+      ]
+    },
+    {
+      "id": "add-subtract-positive-one-to-twenty-one-small-number",
+      "title": "1 to 20 and a small number",
+      "questions": [
+        { "op": "+", "aMax": 20, "bMax": 10 },
+        { "op": "-", "aMax": 20, "bMax": 20, "positiveResult": true }
+      ]
+    },
+    {
+      "id": "add-subtract-positive-one-large-number-one-small-number",
+      "title": "1 to 100 and a small number",
+      "questions": [
+        { "op": "+", "aMax": 100, "bMax": 10 },
+        { "op": "-", "aMax": 100, "bMax": 10, "positiveResult": true }
+      ]
+    }
+  ]
+}

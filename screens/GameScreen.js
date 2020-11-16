@@ -3,8 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'rea
 import { Component } from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 
-import mathLevels from '../lib/math-levels';
-import { shuffleArray } from '../lib/math-question';
+import { generateMathQuestion } from '../lib/levels';
 
 const GAME_LENGTH = 120; // in seconds
 
@@ -64,11 +63,11 @@ class GameScreen extends Component {
 
   newQuestion() {
     const level = this.props.route.params.level;
-    const mq = mathLevels.filter(e => e.id === level)[0].func();
-    const choices = [mq.result].concat(mq.otherChoices);
-    const buttonsData = shuffleArray(choices.map(c => ({ status: true, isCorrect: mq.result === c, val: c })));
+    const q = generateMathQuestion(level);
+
+    const buttonsData = q.choices.map(c => ({ status: true, isCorrect: q.result === c, val: c }));
     this.setState({
-      question: mq.question,
+      question: q.question,
       button1: buttonsData[0],
       button2: buttonsData[1],
       button3: buttonsData[2],

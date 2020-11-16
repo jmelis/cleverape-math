@@ -3,9 +3,10 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, 
 import AsyncStorage from '@react-native-community/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 
-import mathLevels from '../lib/math-levels';
+import levels from '../lib/levels';
 
-const ShowOps = ({ ops }) => {
+const ShowOps = ({ item }) => {
+  const ops = item.questions.map(q => q.op);
   return ops.map(op => {
     if (op === '+') {
       return <AntDesign key='+' name="plussquare" size={32} color="#18427c" />;
@@ -19,7 +20,7 @@ const Item = ({ item, onPress, style, maxScore }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
     <View style={{flex: 1, flexDirection: 'row'}}>
         <Text style={{flex: 10, fontSize: 32}}>
-          <ShowOps ops={item.ops} />&nbsp;{item.title}
+          <ShowOps item={item} />&nbsp;{item.title}
         </Text>
         <Text style={{flex: 4, fontSize: 32, textAlign: 'right'}}>
           {maxScore}
@@ -63,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={mathLevels}
+        data={levels}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         extraData={maxScores}

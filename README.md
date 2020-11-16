@@ -10,7 +10,7 @@ It has been written using https://expo.io/, which is a [React Native](https://re
 
 ## Math levels
 
-All the levels are defined in [math-levels.js](lib/math-levels.js).
+All the levels are defined in [levels.json](lib/levels.json).
 
 ## Limitations & Roadmap
 
